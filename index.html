@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trottinette Business</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      header {
+        background: #333;
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+      }
+      .container {
+        margin: 20px auto;
+        max-width: 900px;
+        text-align: center;
+      }
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .service {
+        background: white;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Trottinette Business</h1>
+    </header>
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="services">
+        <!-- The services will be dynamically loaded here from the backend -->
+      </div>
+    </div>
+    <footer>&copy; 2024 Trottinette Business | Contact: +33 123 456 789</footer>
+
+    <!-- Script to fetch services from the backend -->
+    <script>
+      fetch("http://localhost:3000/services")
+        .then((response) => response.json())
+        .then((services) => {
+          const servicesDiv = document.querySelector(".services");
+          services.forEach((service) => {
+            const serviceDiv = document.createElement("div");
+            serviceDiv.className = "service";
+            serviceDiv.innerHTML = `<h3>${service.name}</h3><p>${service.description}</p>`;
+            servicesDiv.appendChild(serviceDiv);
+          });
+        })
+        .catch((err) => console.error("Error fetching services:", err));
+    </script>
+  </body>
+</html>
